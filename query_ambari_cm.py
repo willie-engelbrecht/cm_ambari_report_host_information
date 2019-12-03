@@ -145,10 +145,10 @@ if using_cm:
               str(os) +','+
               str(x['numCores']) +','+
               str(x['physicalMemoryTotal']) +','+ 
-              str(round(int(x['physicalMemoryTotal'])/1024,0)) +','+
+              str(int(round(int(x['physicalMemoryTotal'])/1024,0))) +','+
               str("NA") +','+
               str(x['diskTotal']) +','+
-              str(round(int(x['diskTotal'])/1024,0)) +','+
+              str(int(round(int(x['diskTotal'])/1024,0))) +','+
               str(roles))
         
        
@@ -188,9 +188,9 @@ if using_ambari:
               str(x['Hosts']['os_type']) +','+
               str(x['Hosts']['cpu_count']) +','+
               str(x['Hosts']['total_mem']) +','+ 
-              str(round(int(x['Hosts']['total_mem'])/1024,0)) +','+
+              str(int(round(int(x['Hosts']['total_mem'])/1024,0))) +','+
               str(disk_count) +','+
               str(total_disk_storage) +','+
-              str(round(int(total_disk_storage)/1024,0)) +','+
+              str(int(round(int(total_disk_storage)/1024,0))) +','+
               str(components))
 
