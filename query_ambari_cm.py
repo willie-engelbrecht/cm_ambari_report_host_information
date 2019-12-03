@@ -12,9 +12,10 @@ except:
 if __name__ == "__main__":
 
     optp = OptionParser()
-    optp.add_option("-u", "--username",     dest="username",      help="Ambari Admin Username")
-    optp.add_option("-p", "--password",     dest="password",      help="Ambari Admin Password")
-    optp.add_option("-a", "--serverurl",    dest="serverurl",     help="URL of Ambari/Cloudera Manager, including port")
+    optp.add_option("-u", "--username",       dest="username",       help="Ambari Admin Username")
+    optp.add_option("-p", "--password",       dest="password",       help="Ambari Admin Password")
+    optp.add_option("-o", "--outputfilename", dest="outputfilename", help="Output filename to save the CSV output")
+    optp.add_option("-a", "--serverurl",      dest="serverurl",      help="URL of Ambari/Cloudera Manager, including port")
 
     opts, args = optp.parse_args()
 
@@ -34,7 +35,6 @@ if __name__ == "__main__":
     else:
        print("Please set the Ambari/Cloudera Manager admin password: -p")
        exit = True
-
 
     if opts.serverurl:
         serverurl = opts.serverurl
@@ -92,7 +92,8 @@ else:
 
 ###################
 # Print CSV Headers
-print('ClusterName,Version,Hostname,OSType,CPUCount,TotalMemBytes,TotalMemMB,DiskCount,TotalDiskStorage,TotalDiskStorageMB,HostComponents')
+outputstring = 'ClusterName,Version,Hostname,OSType,CPUCount,TotalMemBytes,TotalMemMB,DiskCount,TotalDiskStorage,TotalDiskStorageMB,HostComponents' + "\n"
+ 
 
 if using_cm:
     response_cookies = response.cookies
@@ -137,17 +138,17 @@ if using_cm:
                     roles += ';'
                 roles += r
 
-        print(str(x['clusterName']) +','+
-              str(x['cdhVersion']) +','+
-              str(x['hostName']) +','+ 
-              str(os) +','+
-              str(x['numCores']) +','+
-              str(x['physicalMemoryTotal']) +','+ 
-              str(int(round(int(x['physicalMemoryTotal'])/1024,0))) +','+
-              str("NA") +','+
-              str(x['diskTotal']) +','+
-              str(int(round(int(x['diskTotal'])/1024,0))) +','+
-              str(roles))
+        outputstring += str(x['clusterName']) +','
+        outputstring += str(x['cdhVersion']) +','
+        outputstring += str(x['hostName']) +','
+        outputstring += str(os) +','
+        outputstring += str(x['numCores']) +','
+        outputstring += str(x['physicalMemoryTotal']) +','
+        outputstring += str(int(round(int(x['physicalMemoryTotal'])/1024,0))) +','
+        outputstring += str("NA") +','
+        outputstring += str(x['diskTotal']) +','
+        outputstring += str(int(round(int(x['diskTotal'])/1024,0))) +','
+        outputstring += str(roles) + "\n"
         
        
         
@@ -180,15 +181,32 @@ if using_ambari:
                 stacks += ';'
             stacks = s['HostStackVersions']['stack'] + ' ' + s['HostStackVersions']['version']
         
-        print(str(x['Hosts']['cluster_name']) +','+
-              str(stacks) +','+
-              str(x['Hosts']['host_name']) +','+ 
-              str(x['Hosts']['os_type']) +','+
-              str(x['Hosts']['cpu_count']) +','+
-              str(x['Hosts']['total_mem']) +','+ 
-              str(int(round(int(x['Hosts']['total_mem'])/1024,0))) +','+
-              str(disk_count) +','+
-              str(total_disk_storage) +','+
-              str(int(round(int(total_disk_storage)/1024,0))) +','+
-              str(components))
+        outputstring += str(x['Hosts']['cluster_name']) +','
+        outputstring += str(stacks) +','
+        outputstring += str(x['Hosts']['host_name']) +','
+        outputstring += str(x['Hosts']['os_type']) +','
+        outputstring += str(x['Hosts']['cpu_count']) +','
+        outputstring += str(x['Hosts']['total_mem']) +','
+        outputstring += str(int(round(int(x['Hosts']['total_mem'])/1024,0))) +','
+        outputstring += str(disk_count) +','
+        outputstring += str(total_disk_storage) +','
+        outputstring += str(int(round(int(total_disk_storage)/1024,0))) +','
+        outputstring += str(components) + "\n"
+
+# Check if we need to write to console or file output
+if opts.outputfilename:
+    print("Redirecting the output to CSV file: " + str(opts.outputfilename))
+    try:
+        fh = open(opts.outputfilename,'w')
+        fh.write(outputstring)
+        fh.close()
+        print("File saved.\n")
+    except:
+        print("Unable to save output to file, printing to screen instead:\n")
+        print(str(outputstring))        
+
+else:
+   print(str(outputstring))
+   
+
 
