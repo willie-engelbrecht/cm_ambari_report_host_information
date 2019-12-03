@@ -50,4 +50,4 @@ hdp-prod-dc1,HDP 3.1,ip-10-0-1-82.eu-central-1.compute.internal,redhat7,8,319613
 ```
 
 If you paste it in Excel and format it by comma-delimited, you'll have something like:
-
+![alt text]https://github.com/willie-engelbrecht/cm_ambari_report_host_information/raw/master/excel_output.JPG "Excel Output")
