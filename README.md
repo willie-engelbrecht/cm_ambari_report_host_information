@@ -23,9 +23,9 @@ The python scripts has two requirements:
 Whether you run Ambari (with or without KNOX) or Cloudera Manager, the python script can accommodate both and will automatically detect the right API to use. 
 
 There are three paramaters to pass:
-*-u admin_username
-*-p admin_password
-*-a url_to_Ambari/ClouderaManager
+* -u admin_username
+* -p admin_password
+* -a url_to_Ambari/ClouderaManager
 
 An example of using Ambari with KNOX:
 ```
