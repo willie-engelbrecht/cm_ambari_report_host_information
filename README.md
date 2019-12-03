@@ -2,17 +2,17 @@
 This repo contains a Python scrip that will help you pull host information from your Ambari or Cloudera Managed cluster. This aids in quick and easy information gathering on the hardware profile of each node in your cluster for capacity planning. 
 
 The information will be written out as CSV, and will contain:
-*Cluster name
-*Version
-*Hostname
-*OSType
-*CPU Count
-*MemBytes
-*MemMB
-*DiskCount
-*DiskStorageBytes
-*DiskStorageMB
-*Host Components/Roles
+* Cluster name
+* Version
+* Hostname
+* OSType
+* CPU Count
+* MemBytes
+* MemMB
+* DiskCount
+* DiskStorageBytes
+* DiskStorageMB
+* Host Components/Roles
 
 ## Prerequistes
 The python scripts has two requirements:
