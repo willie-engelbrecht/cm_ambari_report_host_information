@@ -27,18 +27,21 @@ There are three parameters to pass:
 * -p admin_password
 * -a url_to_Ambari/ClouderaManager
 
+Optionally, you can also save the output to a file instead:
+* -o filename_to_save.csv
+
 An example of using Ambari with KNOX:
 ```
-python3 query_ambari_cm.py -u admin -p admin-password1 -a https://X.X.X.X:8443/hdp-prod-dc1/dp-proxy/ambari/
+python3 query_ambari_cm.py -u admin -p admin-password1 -a https://X.X.X.X:8443/hdp-prod-dc1/dp-proxy/ambari/ -o output.csv
 ```
 
 An example of using Cloudera Manager:
 ```
-python3 query_ambari_cm.py -u admin -p admin-password1 -a http://X.X.X.X:7180
+python3 query_ambari_cm.py -u admin -p admin-password1 -a http://X.X.X.X:7180 -o output.csv
 ```
 
 ## Output
-The python script will generate CSV output and print to screen from where you can copy-paste to a file or Excel spreadsheet.
+The python script will generate CSV output and print to screen from where you can copy-paste to a file or Excel spreadsheet. You can also save the output to a file instead by using the -o flag. 
 
 ```
 ClusterName,Version,Hostname,OSType,CPUCount,TotalMemBytes,TotalMemMB,DiskCount,TotalDiskStorage,TotalDiskStorageMB,HostComponents
