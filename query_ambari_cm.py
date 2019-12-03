@@ -204,9 +204,6 @@ if opts.outputfilename:
     except:
         print("Unable to save output to file, printing to screen instead:\n")
         print(str(outputstring))        
-
 else:
    print(str(outputstring))
-   
-
 
