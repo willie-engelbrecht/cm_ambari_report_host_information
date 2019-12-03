@@ -69,10 +69,8 @@ except:
 
 # If we are not using Cloudera Manager, let's try Ambari
 if not using_cm:
-    print("\nTesting for Ambari API: ")
     try:
-
-        #response = requests.get(serverurl + '/api/v1/clusters/' + clustername, 
+        print("\nTesting for Ambari API: ")
         response = requests.get(serverurl + '/api/v1/clusters/', 
                                 auth=requests.auth.HTTPBasicAuth(username, password), verify=False) 
         jsn = json.loads(response.text)
